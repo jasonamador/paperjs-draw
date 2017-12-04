@@ -1,0 +1,21 @@
+{
+  "name": "paperjs-drawing",
+  "homepage": "https://github.com/jasonamador/paperjs-draw",
+  "authors": [
+    "Jason Amador <jason.amador@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "paper": "^0.11.5",
+    "paperjs": "*"
+  }
+}
