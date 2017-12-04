@@ -19,6 +19,7 @@ window.onload = () => {
       fillColor: document.getElementById('fillColorSelector').value,
       fillOpacity: document.getElementById('fillOpacity').value,
       strokeWidth: Number.parseInt(document.getElementById('brushWidth').value),
+      closed: true,
     };
 
     let mouse = new Path();
@@ -43,17 +44,19 @@ window.onload = () => {
   }
 
   brush.onMouseDrag = (e) => {
-    paths.mouse.add(e.point);
-    paths.mouse.smooth();
+    if (e.point.getDistance(paths.mouse.lastSegment.point) > 10) {
+      paths.mouse.add(e.point);
+      paths.mouse.smooth();
 
-    paths.xMirror.add([view.size.width - e.point.x, e.point.y]);
-    paths.xMirror.smooth();
+      paths.xMirror.add([view.size.width - e.point.x, e.point.y]);
+      paths.xMirror.smooth();
 
-    paths.yMirror.add([e.point.x, view.size.height - e.point.y]);
-    paths.yMirror.smooth();
+      paths.yMirror.add([e.point.x, view.size.height - e.point.y]);
+      paths.yMirror.smooth();
 
-    paths.xyMirror.add([view.size.width - e.point.x, view.size.height - e.point.y]);
-    paths.xyMirror.smooth();
+      paths.xyMirror.add([view.size.width - e.point.x, view.size.height - e.point.y]);
+      paths.xyMirror.smooth();
+    }
   }
 
   brush.onMouseUp = (e) => {
@@ -61,6 +64,7 @@ window.onload = () => {
     paths.xMirror.simplify();
     paths.yMirror.simplify();
     paths.xyMirror.simplify();
+    console.log(paths.mouse);
   }
 
   view.onFrame = () => {
