@@ -20,7 +20,7 @@ window.onload = () => {
       fillColor: document.getElementById('fillColorSelector').value,
       fillOpacity: document.getElementById('fillOpacity').value,
       strokeWidth: Number.parseInt(document.getElementById('brushWidth').value),
-      closed: true,
+      closed: false,
     };
 
     let mouse = new Path();
@@ -51,9 +51,9 @@ window.onload = () => {
     orbit.x += 20 * Math.cos(theta);
     orbit.y += 20 * Math.sin(theta);
     point.x = orbit.x + 40 * Math.cos(theta);
-    point.y = orbit.y + 40 * Math.cos(theta);
+    point.y = orbit.y + 40 * Math.sin(theta);
 
-    if (point.getDistance(paths.mouse.lastSegment.point) > 10) {
+    if (point.getDistance(paths.mouse.lastSegment.point) >  1) {
       paths.mouse.add(point);
       paths.mouse.smooth();
 
@@ -81,9 +81,8 @@ window.onload = () => {
   document.getElementById('clearCanvas').addEventListener('click', (e) => {
     e.preventDefault();
     let paths = paper.projects[0].layers[0].children;
-    console.log(paths);
     while (paths.length) {
-      paths.pop().remove();
-    }
+        paths.pop().remove();
+      }
   });
 };
