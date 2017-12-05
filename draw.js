@@ -60,13 +60,22 @@ window.onload = () => {
   }
 
   brush.onMouseUp = (e) => {
+    /*
     paths.mouse.simplify();
     paths.xMirror.simplify();
     paths.yMirror.simplify();
     paths.xyMirror.simplify();
-    console.log(paths.mouse);
+    */
   }
 
   view.onFrame = () => {
   }
+
+  document.getElementById('clearCanvas').addEventListener('click', (e) => {
+    e.preventDefault();
+    let paths = paper.projects[0].layers[0].children;
+    while (paths.length) {
+      paths.pop().remove();
+    }
+  });
 };
